@@ -1,0 +1,27 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "japan-swing-market-data"
+version = "0.1.0"
+description = "J-Quants V2 market data updater"
+requires-python = ">=3.12,<3.13"
+dependencies = ["httpx>=0.28,<0.29", "pyarrow>=26,<27", "duckdb>=2,<3", "boto3>=1.44,<2", "filelock>=3.20,<4", "tzdata>=2025.2"]
+
+[project.optional-dependencies]
+dev = ["pytest>=9,<10", "ruff>=0.14", "pyyaml>=6,<7", "moto[s3]>=5,<6"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/japan_swing_market"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 110
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "B"]
